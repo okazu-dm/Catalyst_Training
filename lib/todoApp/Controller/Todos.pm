@@ -28,6 +28,11 @@ sub index :Path :Args(0) {
 }
 
 
+sub get :Local {
+	my ($self, $c)=@_;
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+	$c->stash(template => 'todos/list.tt');
+}
 
 =encoding utf8
 
