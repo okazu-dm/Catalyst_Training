@@ -43,11 +43,11 @@ sub create :Local {
 	my $name = $c->request->body_parameters->{name};
 	my $comment = $c->request->body_parameters->{comment};
 	my $todo = $c->model("DB::Todo")->create({
-			name =>"tewt1",
-			comment => "tesfcom",
+			name =>$name,
+			comment => $comment,
 		});
 	$c->log->debug($c);
-	$c->stash(todos => [$c->model('DB::Todo')->all], added => $todo);
+	$c->stash(todos => [$c->model('DB::Todo')->all], added => $todo, template=>"todos/get.tt");
 
 }
 
