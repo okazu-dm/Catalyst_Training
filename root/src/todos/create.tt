@@ -14,9 +14,13 @@
     <tr><th>Title</th><th>Rating</th><th>Author(s)</th></tr>
     [% # Display each book in a table row %]
         <h1>Input your todo</h1>
-        <form action="create" method="post">
-            <input type="text" name="name">
-            <input type="text" name="comment">
+        <form action="../create" method="post">
+            <label for="">Todo Name</label>
+            <input type="text" name="name"><br>
+            <label for="">Comment(Optionally)</label>
+            <input type="text" name="comment"><br>
+            <label for="">DeadLine(Optionally)</label>
+            <input type="date" name="deadline"><br>
             <input type="submit">Submit</input>
         </form>
     </table>

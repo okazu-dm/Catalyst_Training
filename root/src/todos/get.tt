@@ -12,6 +12,7 @@
     <table>
     <tr><th>Title</th><th>Comment</th><th>Deadline</th></tr>
     [% # Display each book in a table row %]
+    <a href="create">Create Your TODO</a>
     [% FOREACH todo IN todos -%]
       <tr>
         <td>[% todo.name %]</td>
