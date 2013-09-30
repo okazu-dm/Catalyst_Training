@@ -8,14 +8,15 @@
     [% # output (use View Source in browser to see the effect) -%]
     
     [% # Some basic HTML with a loop to display books -%]
+    <h2>[% status_msg %]</h2>
     <table>
-    <tr><th>Title</th><th>Rating</th><th>Author(s)</th></tr>
+    <tr><th>Title</th><th>Comment</th><th>Deadline</th></tr>
     [% # Display each book in a table row %]
     [% FOREACH todo IN todos -%]
       <tr>
         <td>[% todo.name %]</td>
         <td>[% todo.comment %]</td>
-        <td></td>
+        <td>[% todo.deadline %]</td>
       </tr>
     [% END -%]
     </table>
