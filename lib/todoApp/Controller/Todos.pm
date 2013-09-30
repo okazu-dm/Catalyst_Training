@@ -23,7 +23,6 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
     $c->response->body('Matched todoApp::Controller::Todos in Todos.');
 }
 
@@ -31,47 +30,28 @@ sub index :Path :Args(0) {
 sub get :Local {
 	my ($self, $c)=@_;
 	$c->stash(todos => [$c->model('DB::Todo')->all]);
-	$c->stash(template => 'todos/list.tt');
 }
-
-
-
 
 
 #REST api
 
-sub post :create {
+sub create :Local {
 	my ($self, $c)=@_;
-	my $name = $c->request->parameters->{name};
-	my $comment = $c->request->parameters->{comment};
-	my $deadline = $c->request->parameters->{deadline};
-	$c->stash(todos => [$c->model('DB::Todo')->all]);
+	if(!exists $c->request->parameters->{name}){
+		return 	$c->stash(template => 'todos/create.tt');
+	}
+	my $name = $c->request->body_parameters->{name};
+	my $comment = $c->request->body_parameters->{comment};
+	my $todo = $c->model("DB::Todo")->create({
+			name =>"tewt1",
+			comment => "tesfcom",
+		});
+	$c->log->debug($c);
+	$c->stash(todos => [$c->model('DB::Todo')->all], added => $todo);
 
 }
 
 
-sub get :todos {
-	my ($self, $c)=@_;
-	$c->stash(todos => [$c->model('DB::Todo')->all]);
-}
-
-sub post :todos {
-	my ($self, $c)=@_;
-	$c->stash(todos => [$c->model('DB::Todo')->all]);
-
-}
-
-sub post :delete {
-	my ($self, $c)=@_;
-	$c->stash(todos => [$c->model('DB::Todo')->all]);
-}
-
-
-sub get :delete {
-	my ($self, $c)=@_;
-	$c->stash(todos => [$c->model('DB::Todo')->all]);
-		
-}
 
 =encoding utf8
 
