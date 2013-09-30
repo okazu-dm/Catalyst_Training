@@ -34,6 +34,45 @@ sub get :Local {
 	$c->stash(template => 'todos/list.tt');
 }
 
+
+
+
+
+#REST api
+
+sub post :create {
+	my ($self, $c)=@_;
+	my $name = $c->request->parameters->{name};
+	my $comment = $c->request->parameters->{comment};
+	my $deadline = $c->request->parameters->{deadline};
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+
+}
+
+
+sub get :todos {
+	my ($self, $c)=@_;
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+}
+
+sub post :todos {
+	my ($self, $c)=@_;
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+
+}
+
+sub post :delete {
+	my ($self, $c)=@_;
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+}
+
+
+sub get :delete {
+	my ($self, $c)=@_;
+	$c->stash(todos => [$c->model('DB::Todo')->all]);
+		
+}
+
 =encoding utf8
 
 =head1 AUTHOR
